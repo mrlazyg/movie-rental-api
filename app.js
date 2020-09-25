@@ -18,7 +18,7 @@ app.use(cookieParser()); // initialize cookie-parser to allow us access the cook
   app.use(morgan('dev'));
   console.log('Morgan enabled...');
 } */
-
+app.use('/', router);
 app.use('/api/genres', genreRouter);
 app.use('/api/customers', customerRouter);
 app.use('api/movies', movieRouter);
