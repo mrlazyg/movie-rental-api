@@ -1,7 +1,7 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const morgan = require('morgan');
+// const morgan = require('morgan');
 const router = require('./routes/Router');
 const genreRouter = require('./routes/Genres');
 const customerRouter = require('./routes/Customers');
@@ -14,10 +14,10 @@ app.use(express.urlencoded({ extended: true })); // initialize body-parser to pa
 app.use(cookieParser()); // initialize cookie-parser to allow us access the cookies stored in the browser
 
 /* Use logger in specific env */
-if (app.get('env') === 'development') {
+/* if (app.get('env') === 'development') {
   app.use(morgan('dev'));
   console.log('Morgan enabled...');
-}
+} */
 
 app.use('/api/genres', genreRouter);
 app.use('/api/customers', customerRouter);
