@@ -12,7 +12,11 @@ const courses = [
 
 /* METHOD : GET ----- */
 router.get('/', (req, res) => {
-  const newLocal = "<h2>Type <b style='color:red;'>/api/genres</b> to see genre details</h2>";
+  const newLocal = `<h2>Type <b style='color:red;'>/api/courses</b> to see course details</h2>
+  <br>
+  <h2>Type <b style='color:red;'>/api/genres</b> to see genre details</h2>
+  <br>
+  <h2>Type <b style='color:red;'>/api/customers</b> to see customer details</h2>`;
   res.send(newLocal);
 });
 
