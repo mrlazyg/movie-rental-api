@@ -21,7 +21,7 @@ app.use(cookieParser()); // initialize cookie-parser to allow us access the cook
 app.use('/', router);
 app.use('/api/genres', genreRouter);
 app.use('/api/customers', customerRouter);
-app.use('api/movies', movieRouter);
+app.use('/api/movies', movieRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, async () => {
