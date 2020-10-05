@@ -1,16 +1,15 @@
 const mongoose = require('mongoose');
 
-const Genre = mongoose.model(
-  'Genre',
-  new mongoose.Schema(
-    {
-      name: {
-        type: String,
-        required: true,
-        minlength: 5,
-        maxlength: 50,
-      },
-      /* genre: {
+const genreSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      minlength: 5,
+      maxlength: 50,
+      trim: true,
+    },
+    /* genre: {
         type: String,
         required: true,
         minlength: 3,
@@ -21,12 +20,13 @@ const Genre = mongoose.model(
         type: Boolean,
         default: false,
       }, */
-    },
-    {
-      collection: 'GENRES',
-      versionKey: false,
-    }
-  )
+  },
+  {
+    collection: 'GENRES',
+    versionKey: false,
+  }
 );
 
-module.exports = Genre;
+const Genre = mongoose.model('Genre', genreSchema);
+
+module.exports = { Genre, genreSchema };

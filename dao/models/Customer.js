@@ -9,6 +9,7 @@ const Customer = mongoose.model(
         required: true,
         minlength: 5,
         maxlength: 50,
+        trim: true,
       },
       isGold: {
         type: Boolean,

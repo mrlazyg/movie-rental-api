@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { genreSchema } = require('./Genre');
 
 const Movie = mongoose.model(
   'Movie',
@@ -9,17 +10,24 @@ const Movie = mongoose.model(
         required: true,
         minlength: 5,
         maxlength: 50,
+        trim: true,
       },
+      /* Hybrid approach */
       genre: {
-        type: String,
+        type: genreSchema,
         required: true,
-        minlength: 3,
-        maxlength: 50,
       },
       release: Date,
-      isAvailable: {
-        type: Boolean,
-        default: false,
+      numberInStock: {
+        type: Number,
+        required: true,
+        min: 0,
+      },
+      dailyRentalRate: {
+        type: Number,
+        required: true,
+        min: 0,
+        max: 100,
       },
     },
     {

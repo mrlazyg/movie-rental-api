@@ -4,12 +4,13 @@ const router = express.Router();
 
 const Customer = require('../dao/models/Customer');
 
-/* METHOD : GET ----- */
+/* Get all customers ----- */
 router.get('/', async (req, res) => {
   const customers = await Customer.find();
   res.send(customers);
 });
 
+/* Get a customer by Id */
 router.get('/:id', async (req, res) => {
   const customer = await Customer.findById(req.params.id);
 
@@ -18,7 +19,7 @@ router.get('/:id', async (req, res) => {
   res.send(customer);
 });
 
-/* METHOD : POST ----- */
+/* Create a new customer ----- */
 router.post('/', async (req, res) => {
   const { error } = validateInput(req.body);
   if (error) return res.status(400).send({ error: error.details[0].message });
@@ -29,7 +30,7 @@ router.post('/', async (req, res) => {
   res.send(customer);
 });
 
-/* METHOD : PUT ----- */
+/* Update a customer by Id ----- */
 router.put('/:id', async (req, res) => {
   const { error } = validateInput(req.body);
   if (error) return res.status(400).send({ error: error.details[0].message });
@@ -40,6 +41,7 @@ router.put('/:id', async (req, res) => {
   res.send(customer);
 });
 
+/* Delete a customer */
 router.delete('/:id', async (req, res) => {
   const customer = await Customer.findByIdAndRemove(req.params.id);
 

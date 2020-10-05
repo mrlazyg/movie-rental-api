@@ -4,12 +4,13 @@ const router = express.Router();
 
 const Movie = require('../dao/models/Movie');
 
-/* METHOD : GET ----- */
+/* Get all movies ----- */
 router.get('/', async (req, res) => {
   const movies = await Movie.find();
   res.send(movies);
 });
 
+/* Get movie by Id */
 router.get('/:id', async (req, res) => {
   const movie = await Movie.findById(req.params.id);
 
@@ -18,7 +19,7 @@ router.get('/:id', async (req, res) => {
   res.send(movie);
 });
 
-/* METHOD : POST ----- */
+/* Create a new movie ----- */
 router.post('/', async (req, res) => {
   const { error } = validateInput(req.body);
   if (error) return res.status(400).send({ error: error.details[0].message });
@@ -29,7 +30,7 @@ router.post('/', async (req, res) => {
   res.send(movie);
 });
 
-/* METHOD : PUT ----- */
+/* Update a movie by Id ----- */
 router.put('/:id', async (req, res) => {
   /* If Invalid return 400 - Bad request */
   const { error } = validateInput(req.body);
@@ -42,6 +43,7 @@ router.put('/:id', async (req, res) => {
   res.send(movie); //Return Updated genre details
 });
 
+/* Delete a movie */
 router.delete('/:id', async (req, res) => {
   const movie = await Movie.findByIdAndRemove(req.params.id);
 
@@ -54,9 +56,10 @@ router.delete('/:id', async (req, res) => {
 function validateInput(body) {
   const schema = Joi.object({
     name: Joi.string().min(5).max(50).required(),
-    genre: Joi.string().min(3).max(50).required(),
+    genreId: Joi.string().required(),
     release: Joi.date(),
-    isAvailable: Joi.boolean(),
+    numberInStock: Joi.number().min(0).required(),
+    dailyRentalRate: Joi.number().min(0).max(100).required(),
   });
   return schema.validate(body);
 }
