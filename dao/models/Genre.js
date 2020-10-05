@@ -5,21 +5,10 @@ const genreSchema = new mongoose.Schema(
     name: {
       type: String,
       required: true,
-      minlength: 5,
+      minlength: 3,
       maxlength: 50,
       trim: true,
     },
-    /* genre: {
-        type: String,
-        required: true,
-        minlength: 3,
-        maxlength: 50,
-      },
-      release: Date,
-      isAvailable: {
-        type: Boolean,
-        default: false,
-      }, */
   },
   {
     collection: 'GENRES',

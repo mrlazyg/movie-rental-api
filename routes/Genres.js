@@ -70,7 +70,7 @@ router.delete('/:id', async (req, res) => {
 /* Input Validation */
 function validateInput(body) {
   const schema = Joi.object({
-    name: Joi.string().min(5).max(50).required(),
+    name: Joi.string().min(3).max(50).required(),
   });
   return schema.validate(body);
 }
