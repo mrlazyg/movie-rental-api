@@ -1,22 +1,17 @@
 const Joi = require('@hapi/joi');
 const express = require('express');
 const router = express.Router();
-
+const GenreController = require('../controllers/GenreController');
 const { Genre } = require('../dao/models/Genre');
 
 /* Get all genres ----- */
-router.get('/', async (req, res) => {
-  const genres = await Genre.find();
-  res.send(genres);
+router.get('/', (req, res) => {
+  GenreController.getAllGenre(req, res);
 });
 
 /* Get genre by Id */
-router.get('/:id', async (req, res) => {
-  const genre = await Genre.findById(req.params.id);
-
-  if (!genre) return res.status(404).send('The genre with the given ID was not found.');
-
-  res.send(genre);
+router.get('/:id', (req, res) => {
+  GenreController.getGenre(req, res);
 });
 
 /* Create a new genre ----- */
