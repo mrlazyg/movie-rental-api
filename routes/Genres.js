@@ -4,30 +4,23 @@ const router = express.Router();
 const GenreController = require('../controllers/GenreController');
 const { Genre } = require('../dao/models/Genre');
 
-/* Get all genres ----- */
 router.get('/', (req, res) => {
-  GenreController.getAllGenre(req, res);
+  GenreController.getAllGenre(req, res); // all genres
 });
 
-/* Get genre by Id */
-router.get('/:id', (req, res) => {
+/* router.get('/:id', (req, res) => {
   GenreController.getGenre(req, res);
-});
+}); */
+router.get('/:id', GenreController.getGenre); // get by id
 
-/* Create a new genre ----- */
-router.post('/', async (req, res) => {
+router.post('/', (req, res) => {
   const { error } = validateInput(req.body);
   if (error) return res.status(400).send({ error: error.details[0].message });
-
-  let genre = new Genre(req.body);
-  genre = await genre.save();
-
-  res.send(genre);
+  GenreController.createGenre(req, res); // create a new genre
 });
 
 /* Update a genre by Id ----- */
 router.put('/:id', async (req, res) => {
-  /* If Invalid return 400 - Bad request */
   const { error } = validateInput(req.body);
   if (error) return res.status(400).send({ error: error.details[0].message });
 
