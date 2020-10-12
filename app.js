@@ -1,6 +1,5 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
-const session = require('express-session');
 // const morgan = require('morgan');
 const router = require('./routes/Router');
 const genreRouter = require('./routes/Genres');
