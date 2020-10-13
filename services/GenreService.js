@@ -9,11 +9,11 @@ class GenreService {
   static async getGenre(id) {
     try {
       const genre = await Genre.findById(id);
-      // if (!genre) return 'The genre with the given Id was not found.';
+      if (!genre) return 'The genre with the given Id was not found';
       return genre;
     } catch (error) {
-      console.log('Get Genre by Id :', error.message);
-      return 'The genre with the given Id was not found.';
+      console.error('Get Genre by Id :', error.message);
+      return 'Please provide the id in valid format';
     }
   }
 
@@ -23,7 +23,7 @@ class GenreService {
       genre = await genre.save();
       return genre;
     } catch (error) {
-      console.log('Create Genre :', error.message);
+      console.error('Create Genre :', error.message);
       return 'Something wrong!';
     }
   }
