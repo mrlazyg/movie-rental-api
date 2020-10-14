@@ -1,10 +1,10 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
-// const morgan = require('morgan');
 const router = require('./routes/Router');
 const genreRouter = require('./routes/Genres');
 const customerRouter = require('./routes/Customers');
 const movieRouter = require('./routes/Movies');
+const rentalRouter = require('./routes/Rentals');
 const DBConnector = require('./dao/DBConnector');
 
 const app = express();
@@ -14,6 +14,7 @@ app.use(cookieParser()); // initialize cookie-parser to allow us access the cook
 
 /* Use logger in specific env */
 /* if (app.get('env') === 'development') {
+  const morgan = require('morgan');
   app.use(morgan('dev'));
   console.log('Morgan enabled...');
 } */
@@ -21,6 +22,7 @@ app.use('/', router);
 app.use('/api/genres', genreRouter);
 app.use('/api/customers', customerRouter);
 app.use('/api/movies', movieRouter);
+app.use('/api/rentals', rentalRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, async () => {
