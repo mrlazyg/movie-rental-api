@@ -17,7 +17,6 @@ const Movie = mongoose.model(
         type: genreSchema,
         required: true,
       },
-      release: Date,
       numberInStock: {
         type: Number,
         required: true,

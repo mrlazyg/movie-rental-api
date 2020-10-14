@@ -4,7 +4,6 @@ const router = express.Router();
 const CustomerConroller = require('../controllers/CustomerController');
 
 router.get('/', CustomerConroller.getAllCustomer); // get all
-
 router.get('/:id', CustomerConroller.getCustomer); // get one
 
 router.post('/', (req, res) => {

@@ -1,68 +1,32 @@
 const Joi = require('@hapi/joi');
 const express = require('express');
 const router = express.Router();
+const MovieController = require('../controllers/MovieController');
 
-const Movie = require('../dao/models/Movie');
-const { Genre } = require('../dao/models/Genre');
+router.get('/', MovieController.getAllMovie); // get all
+router.get('/:id', MovieController.getMovie); // get one
 
-/* Get all movies ----- */
-router.get('/', async (req, res) => {
-  const movies = await Movie.find();
-  res.send(movies);
-});
-
-/* Get movie by Id */
-router.get('/:id', async (req, res) => {
-  const movie = await Movie.findById(req.params.id);
-
-  if (!movie) return res.status(404).send('The movie with the given ID was not found.');
-
-  res.send(movie);
-});
-
-/* Create a new movie ----- */
-router.post('/', async (req, res) => {
+router.post('/', (req, res) => {
   const { error } = validateInput(req.body);
   if (error) return res.status(400).send({ error: error.details[0].message });
 
-  const genre = await Genre.findById(req.body.genreId);
-  req.body.genre = genre;
-  delete req.body.genreId;
-
-  let movie = new Movie(req.body);
-  movie = await movie.save();
-
-  res.send(movie);
+  MovieController.createMovie(req, res); // create
 });
 
-/* Update a movie by Id ----- */
 router.put('/:id', async (req, res) => {
-  /* If Invalid return 400 - Bad request */
   const { error } = validateInput(req.body);
   if (error) return res.status(400).send({ error: error.details[0].message });
 
-  /* Look up the genre, If doesn't exit return 404 */
-  const movie = await Movie.findByIdAndUpdate(req.params.id, req.body, { new: true });
-  if (!movie) return res.status(404).send('The movie with the given ID was not found !');
-
-  res.send(movie); //Return Updated genre details
+  MovieController.updateMovie(req, res); // update
 });
 
-/* Delete a movie */
-router.delete('/:id', async (req, res) => {
-  const movie = await Movie.findByIdAndRemove(req.params.id);
-
-  if (!movie) return res.status(404).send('The movie with the given ID was not found.');
-
-  res.send(movie);
-});
+router.delete('/:id', MovieController.deleteMovie); // delete
 
 /* Input Validation */
 function validateInput(body) {
   const schema = Joi.object({
     name: Joi.string().min(5).max(50).required(),
-    genreId: Joi.string().required(),
-    release: Joi.date(),
+    genreId: Joi.string().min(24).max(24).required(),
     numberInStock: Joi.number().min(0).required(),
     dailyRentalRate: Joi.number().min(0).max(100).required(),
   });
