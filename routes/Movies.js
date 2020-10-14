@@ -26,7 +26,7 @@ router.delete('/:id', MovieController.deleteMovie); // delete
 function validateInput(body) {
   const schema = Joi.object({
     name: Joi.string().min(5).max(50).required(),
-    genreId: Joi.string().min(24).max(24).required(),
+    genreId: Joi.string().required(),
     numberInStock: Joi.number().min(0).required(),
     dailyRentalRate: Joi.number().min(0).max(100).required(),
   });
