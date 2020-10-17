@@ -28,7 +28,7 @@ class RentalService {
       if (!movie) return 'Invalid movie';
       if (movie.numberInStock === 0) return 'Movie not in stock';
 
-      let rental = new Rental({
+      const rental = new Rental({
         customer: {
           _id: customer._id,
           name: customer.name,
@@ -40,11 +40,11 @@ class RentalService {
           dailyRentalRate: movie.dailyRentalRate,
         },
       });
-      rental = await rental.save();
+      const result = await rental.save();
       movie.numberInStock--;
       movie.save();
 
-      return rental;
+      return result;
     } catch (error) {
       console.error('Create Rental :', error.message);
       return 'Exception in creating rental';

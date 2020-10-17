@@ -19,9 +19,9 @@ class GenreService {
 
   static async createGenre(body) {
     try {
-      let genre = new Genre(body);
-      genre = await genre.save();
-      return genre;
+      const genre = new Genre(body);
+      const result = await genre.save();
+      return result;
     } catch (error) {
       console.error('Create Genre :', error.message);
       return 'Error in creating genre';

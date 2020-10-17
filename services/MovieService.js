@@ -23,9 +23,9 @@ class MovieService {
       const genre = await Genre.findById(body.genreId);
       body.genre = genre;
       delete body.genreId;
-      let movie = new Movie(body);
-      movie = await movie.save();
-      return movie;
+      const movie = new Movie(body);
+      const result = await movie.save();
+      return result;
     } catch (error) {
       console.error('Create Movie :', error.message);
       return 'Exception in creating movie';

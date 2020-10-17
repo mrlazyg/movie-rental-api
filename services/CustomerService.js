@@ -19,9 +19,9 @@ class CustomerService {
 
   static async createCustomer(body) {
     try {
-      let customer = new Customer(body);
-      customer = await customer.save();
-      return customer;
+      const customer = new Customer(body);
+      const result = await customer.save();
+      return result;
     } catch (error) {
       console.error('Create Customer :', error.message);
       return 'Exception in creating customer';
