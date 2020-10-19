@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { MONGODB_URI, DB_OPTIONS } = require('../constant');
+const { MONGODB_URI, DB_OPTIONS } = require('../config/constant');
 
 class DBConnector {
   static async createConnection() {
