@@ -5,7 +5,7 @@ const User = require('../dao/models/User');
 class UserService {
   static async createUser(req) {
     let user = await User.findOne({ email: req.body.email });
-    if (user) return 'User already registered';
+    if (user) return 'registered';
 
     user = new User(_.pick(req.body, ['name', 'email', 'password']));
     const salt = await bcrypt.genSalt(10);
