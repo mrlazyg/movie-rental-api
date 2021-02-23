@@ -6,6 +6,7 @@ const customerRouter = require('./routes/Customers');
 const movieRouter = require('./routes/Movies');
 const rentalRouter = require('./routes/Rentals');
 const userRouter = require('./routes/Users');
+const auth = require('./routes/Auth');
 const DBConnector = require('./dao/DBConnector');
 
 const app = express();
@@ -26,6 +27,7 @@ app.use('/api/customers', customerRouter);
 app.use('/api/movies', movieRouter);
 app.use('/api/rentals', rentalRouter);
 app.use('/api/users', userRouter);
+app.use('/api/auth', auth);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, async () => {
