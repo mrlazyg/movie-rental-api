@@ -27,6 +27,7 @@ const User = mongoose.model(
     },
     {
       collection: 'USERS',
+      timestamps: true,
       versionKey: false,
     }
   )

@@ -11,7 +11,7 @@ class UserService {
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(user.password, salt);
     await user.save();
-    return _.pick(user, ['_id', 'name', 'email']);
+    return _.pick(user, ['name', 'email']);
   }
 }
 
