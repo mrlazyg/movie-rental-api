@@ -6,7 +6,7 @@ const Auth = require('../utils/Auth');
 router.post('/', async (req, res) => {
   const { error } = validateInput(req.body);
   if (error) return res.status(400).send({ error: error.details[0].message });
-  const authStatus = await Auth.userAuthentication(req.body);
+  const authStatus = await Auth.authentication(req.body);
   if (!authStatus) return res.status(400).send('Invalid email or password');
   res.send(authStatus);
 });

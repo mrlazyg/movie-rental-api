@@ -2,6 +2,7 @@ const Joi = require('@hapi/joi');
 const express = require('express');
 const router = express.Router();
 const GenreController = require('../controllers/GenreController');
+const Auth = require('../utils/Auth');
 
 router.get('/', (req, res) => {
   GenreController.getAllGenre(req, res); // all genres
@@ -9,8 +10,9 @@ router.get('/', (req, res) => {
 
 router.get('/:id', GenreController.getGenre); // get by id
 
-router.post('/', (req, res) => {
+router.post('/', Auth.authorization, (req, res) => {
   const { error } = validateInput(req.body);
+  console.log(req.user);
   if (error) return res.status(400).send({ error: error.details[0].message });
   GenreController.createGenre(req, res); // create a new genre
 });
