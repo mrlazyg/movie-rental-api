@@ -9,7 +9,7 @@ class Auth {
     // console.log(user);
     if (!user) return false;
     const status = await bcrypt.compare(body.password, user.password);
-    const token = Auth.generateAuthToken(_.pick(user, ['name', 'email']));
+    const token = Auth.generateAuthToken(_.pick(user, ['_id', 'name']));
     if (status) return token;
     return status;
   }

@@ -13,6 +13,10 @@ class UserService {
     await user.save();
     return _.pick(user, ['name', 'email']);
   }
+
+  static async getUser(id) {
+    return await User.findById(id, { password: 0 });
+  }
 }
 
 module.exports = UserService;

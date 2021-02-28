@@ -2,6 +2,9 @@ const Joi = require('@hapi/joi');
 const express = require('express');
 const router = express.Router();
 const UserController = require('../controllers/UserController');
+const Auth = require('../utils/Auth');
+
+router.get('/me', Auth.authorization, UserController.getUser);
 
 router.post('/', (req, res) => {
   const { error } = validateInput(req.body);
