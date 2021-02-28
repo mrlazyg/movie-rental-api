@@ -2,8 +2,12 @@ const { Genre } = require('../dao/models/Genre');
 
 class GenreService {
   static async getAllGenre() {
-    const genres = await Genre.find();
-    return genres;
+    try {
+      const genres = await Genre.find();
+      return genres;
+    } catch (err) {
+      throw new Error(err);
+    }
   }
 
   static async getGenre(id) {
@@ -13,7 +17,7 @@ class GenreService {
       return genre;
     } catch (error) {
       console.error('Get Genre by Id :', error.message);
-      return 'Please provide the id in valid format';
+      throw new Error('Please provide the id in valid format');
     }
   }
 

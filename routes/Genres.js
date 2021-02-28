@@ -4,9 +4,7 @@ const router = express.Router();
 const GenreController = require('../controllers/GenreController');
 const Auth = require('../utils/Auth');
 
-router.get('/', (req, res) => {
-  GenreController.getAllGenre(req, res); // all genres
-});
+router.get('/', GenreController.getAllGenre); // get all genres
 
 router.get('/:id', GenreController.getGenre); // get by id
 

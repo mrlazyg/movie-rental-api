@@ -1,20 +1,27 @@
 const GenreService = require('../services/GenreService');
 
 class GenreController {
-  static async getAllGenre(req, res) {
-    const genres = await GenreService.getAllGenre();
-    res.send(genres);
+  static async getAllGenre(req, res, next) {
+    try {
+      const genres = await GenreService.getAllGenre();
+      res.send(genres);
+    } catch (err) {
+      next(err);
+    }
   }
 
-  static async getGenre(req, res) {
-    // console.log(req.headers);
-    const { id } = req.params;
-
-    if (id) {
-      const genre = await GenreService.getGenre(id);
-      return res.send(genre);
+  static async getGenre(req, res, next) {
+    try {
+      // console.log(req.headers);
+      const { id } = req.params;
+      if (id) {
+        const genre = await GenreService.getGenre(id);
+        return res.send(genre);
+      }
+      res.status(400).send('Please provide the genre Id');
+    } catch (err) {
+      next(err);
     }
-    res.status(400).send('Please provide the genre Id');
   }
 
   static async createGenre(req, res) {

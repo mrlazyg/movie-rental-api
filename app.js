@@ -29,6 +29,17 @@ app.use('/api/rentals', rentalRouter);
 app.use('/api/users', userRouter);
 app.use('/api/auth', auth);
 
+// Error handler
+app.use((err, req, res, next) => {
+  const { statusCode = 500, message = 'Internal server error' } = err;
+  res.status(statusCode).json({
+    status: 'error',
+    statusCode,
+    message,
+  });
+  next();
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, async () => {
   await DBConnector.createConnection();
