@@ -20,6 +20,7 @@ class GenreController {
       }
       res.status(400).send('Please provide the genre Id');
     } catch (err) {
+      err.statusCode = 400;
       next(err);
     }
   }
