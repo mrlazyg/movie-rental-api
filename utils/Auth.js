@@ -20,6 +20,7 @@ class Auth {
     try {
       const decoded = await Auth.verifyToken(token, 'PrivateKey');
       req.user = decoded;
+      res.header('x-auth-valid', true);
       next();
     } catch (err) {
       res.status(400).send({ error: err.message });
