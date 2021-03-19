@@ -15,12 +15,13 @@ app.use(express.urlencoded({ extended: true })); // initialize body-parser to pa
 app.use(cookieParser()); // initialize cookie-parser to allow us access the cookies stored in the browser
 
 /* Use logger in specific env */
-/* if (app.get('env') === 'development') {
+if (app.get('env') === 'development') {
   const morgan = require('morgan');
   app.use(morgan('dev'));
   console.log('Morgan enabled...');
-} */
+}
 
+// Route handler
 app.use('/', router);
 app.use('/api/genres', genreRouter);
 app.use('/api/customers', customerRouter);

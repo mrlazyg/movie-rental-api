@@ -9,8 +9,8 @@ class Auth {
     // console.log(user);
     if (!user) return false;
     const status = await bcrypt.compare(body.password, user.password);
-    const token = Auth.generateAuthToken(_.pick(user, ['_id', 'name']));
-    if (status) return token;
+    const token = await Auth.generateAuthToken(_.pick(user, ['_id', 'name', 'email']));
+    if (status) return { user: _.pick(user, ['_id', 'name', 'email']), token };
     return status;
   }
 
@@ -18,23 +18,23 @@ class Auth {
     const token = req.header('x-auth-token');
     if (!token) return res.status(401).send('Access denied. Token not found.');
     try {
-      const decoded = jwt.verify(token, 'PrivateKey');
+      const decoded = await Auth.verifyToken(token, 'PrivateKey');
       req.user = decoded;
       next();
     } catch (err) {
-      res.status(400).send('Invalid Token');
+      res.status(400).send({ error: err.message });
     }
   }
 
   static async generateAuthToken(payload) {
-    return jwt.sign(payload, 'PrivateKey');
+    return jwt.sign(payload, 'PrivateKey', { expiresIn: 60 * 60 });
   }
 
   static async verifyToken(token) {
     try {
       return jwt.verify(token, 'PrivateKey');
     } catch (err) {
-      throw new Error(err.message);
+      throw new Error(err);
     }
   }
 }
