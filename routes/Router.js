@@ -3,7 +3,7 @@ const router = express.Router();
 const Utils = require('../utils/Utils');
 
 router.get('/', (req, res) => {
-  const newLocal = `<br><h2>Go to <b style='color:red;'>/api/movies</b> to see course details</h2>
+  const newLocal = `<br><h2>Go to <b style='color:red;'>/api/movies</b> to see movie details</h2>
   <br>
   <h2>Go to <b style='color:red;'>/api/genres</b> to see genre details</h2>
   <br>
