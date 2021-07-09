@@ -9,7 +9,7 @@ class DBConnector {
         console.error('⚠️! Unable to connect to db...', err.message);
         process.exit(1);
       }
-      console.log(`Connected to ${DB_OPTIONS.dbName} db...`);
+      console.log(`Connected to ${DB_OPTIONS.dbName}...`);
     });
   }
 }
