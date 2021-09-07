@@ -10,3 +10,5 @@ module.exports = {
   },
   DB_PORT: 27017,
 };
+
+//TODO: Always remove the server url
