@@ -6,7 +6,7 @@ module.exports = {
     useFindAndModify: false,
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    dbName: process.env.DB_NAME || 'test',
+    dbName: process.env.DB_NAME || 'LOCAL',
   },
   DB_PORT: 27017,
 };
