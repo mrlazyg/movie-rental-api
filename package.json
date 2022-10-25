@@ -26,5 +26,5 @@
   "devDependencies": {
     "morgan": "^1.10.0"
   },
-  "repository": "https://github.com/mrlazyg/movie-rental"
+  "repository": "https://github.com/mrlazyg/rent_movie"
 }
