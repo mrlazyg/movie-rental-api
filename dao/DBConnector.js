@@ -6,10 +6,10 @@ class DBConnector {
     /* mongoose.connect() returns a Promise */
     mongoose.connect(MONGODB_URI, DB_OPTIONS, (err) => {
       if (err) {
-        console.error('⚠️! Unable to connect to db...', err.message);
+        console.error('⚠️! Unable to connect to db..', err.message);
         process.exit(1);
       }
-      console.log(`Connected to ${DB_OPTIONS.dbName}...`);
+      console.log(`Connected to ${DB_OPTIONS.dbName}..`);
     });
   }
 }

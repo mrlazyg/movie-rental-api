@@ -9,7 +9,7 @@ const Rental = mongoose.model(
           name: {
             type: String,
             required: true,
-            minlength: 5,
+            minlength: 3,
             maxlength: 50,
           },
           isGold: {
@@ -19,7 +19,7 @@ const Rental = mongoose.model(
           phone: {
             type: String,
             required: true,
-            minlength: 5,
+            minlength: 10,
             maxlength: 13,
           },
         }),

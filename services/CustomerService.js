@@ -24,7 +24,7 @@ class CustomerService {
       return result;
     } catch (error) {
       console.error('Create Customer :', error.message);
-      return 'Exception in creating customer';
+      return error.message;
     }
   }
 

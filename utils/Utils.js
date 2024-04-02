@@ -1,4 +1,4 @@
-const request = require('requestretry');
+// const request = require('requestretry');
 
 class Utils {
   static invokeEndpoint(url, reqBody, methodType, maxAttempts, retryDelay) {

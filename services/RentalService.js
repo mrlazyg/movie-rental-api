@@ -1,6 +1,8 @@
 const Customer = require('../dao/models/Customer');
 const Movie = require('../dao/models/Movie');
 const Rental = require('../dao/models/Rental');
+const SMTPServer = require('./SMTPServer');
+const smtp = new SMTPServer();
 
 class RentalService {
   static async getAllRental() {
@@ -33,6 +35,7 @@ class RentalService {
           _id: customer._id,
           name: customer.name,
           phone: customer.phone,
+          isGold: customer.isGold,
         },
         movie: {
           _id: movie._id,
@@ -43,6 +46,8 @@ class RentalService {
       const result = await rental.save();
       movie.numberInStock--;
       movie.save();
+
+      smtp.sendEmailNotification({ data: result, email: customer?.email });
 
       return result;
     } catch (error) {
